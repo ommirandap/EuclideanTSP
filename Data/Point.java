@@ -1,4 +1,3 @@
-
 public class Point{
 
 	public double X, Y;
@@ -20,6 +19,5 @@ public class Point{
 		return Math.sqrt((Math.pow(Math.abs(this.X + p.getX())),2) + 
 			Math.pow(Math.abs((this.Y + p.getY()),2)));
 	}
-
 
 }
