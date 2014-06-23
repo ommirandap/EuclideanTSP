@@ -16,28 +16,25 @@ public class Point{
 	}
 
 	public double distance(Point p){
-		return 
-		Math.sqrt(
-			(
-				Math.pow(
-				Math.abs(
-					(this.X + p.getX())
-				,2) 
-			+ 
-				Math.pow(
-				Math.abs(
-					(this.Y + p.getY())
-				,2)
-			)
-		);
+		
+		double absX = Math.abs(this.X + p.getX());
+		double absY = Math.abs(this.Y + p.getY());
+		double powX = absX * absX;
+		double powY = absY * absY;
+
+		return Math.sqrt(powX + powY);
 	}
 
-	public double setX(double x){
+	public void setX(double x){
 		this.X = x;
 	}
 
-	public double setY(double y){
+	public void setY(double y){
 		this.Y = y;
+	}
+
+	public String toString(){
+		return "(" + this.X + "," + this.Y + ")";
 	}
 
 }
