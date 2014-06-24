@@ -12,14 +12,13 @@ public class DataReader {
 
 	public void getData(){
 		
-
 		try{
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 
 			String line = br.readLine();
 			int nPoints = Integer.parseInt(line);
 			this.data = new Point[nPoints];
-
 
 			for(int i = 0; ((line = br.readLine())!=null); i++){
 				String [] aux = line.split(" ");
