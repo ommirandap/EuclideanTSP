@@ -1,4 +1,4 @@
-package cc4102.tarea3.log;
+package cc4102.tarea3.io.log;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

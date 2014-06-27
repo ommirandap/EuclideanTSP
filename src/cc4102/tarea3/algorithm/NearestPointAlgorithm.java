@@ -5,9 +5,9 @@ import cc4102.tarea3.geom.Point;
 public class NearestPointAlgorithm implements TSPAlgorithm {
 
 	@Override
-	public double run(Point[] pointList) {
+	public TSPAlgorithmResults run(Point[] pointList) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 	
 	@Override

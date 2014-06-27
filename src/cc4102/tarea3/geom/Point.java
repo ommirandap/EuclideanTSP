@@ -1,5 +1,7 @@
 package cc4102.tarea3.geom;
 
+import java.util.List;
+
 public class Point{
 
 	public double X, Y;
@@ -38,8 +40,8 @@ public class Point{
 	 */
 	public double distance2(Point p) {
 		
-		double absX = Math.abs(this.X + p.getX());
-		double absY = Math.abs(this.Y + p.getY());
+		double absX = Math.abs(this.X - p.getX());
+		double absY = Math.abs(this.Y - p.getY());
 		double powX = absX * absX;
 		double powY = absY * absY;
 
@@ -66,5 +68,21 @@ public class Point{
 		}
 		return false;
 	}
-
+	
+	public double crossProduct(Point v) {
+		return (getX()*v.getY()) - (getY()*v.getX());
+	}
+	
+	public Point substract(Point v) {
+		return new Point(getX()-v.getX(), getY()-v.getY());
+	}
+	
+	public static double getCircuitLength(List<Point> path) {
+		if(path.size() < 2) return 0;
+		double length = 0;
+		for(int i=0;i<path.size()-1;i++) {
+			length+= path.get(i).distance(path.get(i+1));
+		}
+		return length + path.get(path.size()-1).distance(path.get(0));		
+	}
 }
