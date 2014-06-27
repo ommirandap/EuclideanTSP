@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +37,11 @@ public class MainTestWindow {
 	}
 	
 	class MyJFrame extends JFrame {
+		BufferedImage bi;
 		
 		public MyJFrame() {
-			setBackground(Color.white);
+			bi = new BufferedImage(500,500, BufferedImage.TYPE_INT_RGB);
+			//setBackground(Color.white);
 			MyMouseAdapter mAdapter = new MyMouseAdapter();
 			addMouseListener(mAdapter);
 			addMouseMotionListener(mAdapter);
@@ -50,10 +53,11 @@ public class MainTestWindow {
 		}
 		
 		@Override
-		public void paint(Graphics g) {
+		public void paint(Graphics jframeg) {
 			//super.paint(g);
-			System.out.println("paiting");
-			g.clearRect(0, 0, 500, 500);
+			Graphics g = bi.getGraphics();
+			g.setColor(Color.white);
+			g.fillRect(0, 0, 500, 500);
 			TSPAlgorithmResults results;
 				 
 			for(Point p : points) {
@@ -75,6 +79,7 @@ public class MainTestWindow {
 					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 				}
 			}
+			jframeg.drawImage(bi, 0,0,null);
 		}
 	}
 	
@@ -106,7 +111,6 @@ public class MainTestWindow {
 		
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			System.out.println("moved");
 			if(selected != null) {
 				selected.setX(e.getX());
 				selected.setY(e.getY());
@@ -116,6 +120,7 @@ public class MainTestWindow {
 		
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			System.out.println("released");
 			selected = null;
 			jframe.repaint();
 		}
