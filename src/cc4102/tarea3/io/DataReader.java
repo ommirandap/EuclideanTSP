@@ -1,5 +1,10 @@
 package cc4102.tarea3.io;
-import java.io.*;
+
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 
 import cc4102.tarea3.geo.Country;
 import cc4102.tarea3.geom.Point;
@@ -14,7 +19,9 @@ public class DataReader {
 	}
 
 	public void getData(){
+		
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
+
 			String line = br.readLine();
 			int nPoints = Integer.parseInt(line);
 			this.data = new Point[nPoints];
