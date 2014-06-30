@@ -1,23 +1,25 @@
 package cc4102.tarea3.algorithm;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-
 import cc4102.tarea3.geom.Point;
 
 public class NearestPointAlgorithm implements TSPAlgorithm {
 
 	@Override
-	public TSPAlgorithmResults run(Point[] pointList) {
-		// TODO Auto-generated method stub
+	public TSPAlgorithmResults run(Point[] points) {
+		
+		final Point[] pointList = points.clone();
 		int nPoints = pointList.length;
+		
 		double [][] distanceMatrix = new double[nPoints][nPoints];
 		
 		for(int i = 0; i < nPoints; i++){
 			for(int j = 0; j < nPoints; j++){
-				distanceMatrix[i][j] = pointList[i].distance(pointList[j]);
+				if(i == j)
+					distanceMatrix[i][j] = Integer.MAX_VALUE;
+				else
+					distanceMatrix[i][j] = pointList[i].distance(pointList[j]);
 			}
 		}
 		
@@ -26,21 +28,28 @@ public class NearestPointAlgorithm implements TSPAlgorithm {
 		List<Point> currentCircuit = new LinkedList<Point>();
 		currentCircuit.add(pointList[startPoint]);
 		
-		HashMap<Integer, Point> hashPoint = new HashMap<Integer, Point>();
-		for(int i = 0; i < nPoints; i++){
-			hashPoint.put(i, pointList[i]);
-		}
+		// TODO Modificar este valor centinela
+		int indexMin = startPoint;
+		double distanceMin = Integer.MAX_VALUE;
+		int currentIndexPoint = startPoint;
 		
-		int indexMin;
-		double distanceMin = 100000000;
-		for(int i = 0; i < nPoints && i != startPoint; i++){
-			double actualDistance = distanceMatrix[startPoint][i];
-			if(actualDistance < distanceMin){
-				indexMin = i;
-				distanceMin = actualDistance;
+		while(currentCircuit.size() != nPoints){
+			// Ahora este punto es inalcanzable para el resto de puntos
+			for(int i = 0; i < nPoints; i++)
+				distanceMatrix[i][currentIndexPoint] = Integer.MAX_VALUE;
+			distanceMin = Integer.MAX_VALUE;
+			for(int iterPoint = 0; iterPoint < nPoints; iterPoint++){
+				double volatileDistance = distanceMatrix[currentIndexPoint][iterPoint];
+				if(volatileDistance < distanceMin){
+					indexMin = iterPoint;
+					distanceMin = volatileDistance;
+					
+				}
 			}
+			currentCircuit.add(pointList[indexMin]);
+			currentIndexPoint = indexMin;
+			
 		}
-		
 		
 		
 		TSPAlgorithmResults results = new TSPAlgorithmResults();
