@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import cc4102.tarea3.algorithm.ConvexHullAlgorithm;
-import cc4102.tarea3.algorithm.NearestPointAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm.TSPAlgorithmResults;
 import cc4102.tarea3.geom.Point;
@@ -20,13 +19,8 @@ public class MainTestWindow {
 	List<Point> points;
 	List<Point> path;
 	Point selected;
-<<<<<<< HEAD:Test/MainTestWindow.java
-	//TSPAlgorithm algorithm = new ConvexHullAlgorithm();
-	TSPAlgorithm algorithm = new NearestPointAlgorithm();
-=======
 	TSPAlgorithm algorithm = new ConvexHullAlgorithm();
-	//TSPAlgorithm algorithm = new ConvexHullDummyTest();
->>>>>>> 1c7fd2c37392e089ceea008a82a5e44f3ac88e1a:Test/uitest/MainTestWindow.java
+
 	JFrame jframe;
 	
 	public MainTestWindow() {
