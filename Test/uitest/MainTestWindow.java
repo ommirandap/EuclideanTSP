@@ -1,3 +1,4 @@
+package uitest;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -19,6 +20,7 @@ public class MainTestWindow {
 	List<Point> path;
 	Point selected;
 	TSPAlgorithm algorithm = new ConvexHullAlgorithm();
+	//TSPAlgorithm algorithm = new ConvexHullDummyTest();
 	JFrame jframe;
 	
 	public MainTestWindow() {
@@ -78,6 +80,8 @@ public class MainTestWindow {
 					
 					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 				}
+				g.setColor(Color.ORANGE);
+				g.drawString("length:"+results.length, 15, 40);
 			}
 			jframeg.drawImage(bi, 0,0,null);
 		}

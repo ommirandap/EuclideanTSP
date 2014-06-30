@@ -6,12 +6,12 @@ import cc4102.tarea3.experiment.TSPExperiment;
 public class TSPExperimentLogger extends Logger {
 	
 	public String[] getColumns() {
-		return new String[]{"Mem type", "Start time", "End time", "Time taken", "Nodes", "Leaves", "Exponent", "Height", "P generator", "Strategy"};
+		return new String[]{"Country", "Algorithm", "Start time", "End time", "Time taken", "Length", "Performance", "Cities"};
 	}
 	
 	@Override
 	public String getLogBasename() {
-		return "build-";
+		return "tsp-";
 	}
 	
 	@Override
@@ -20,12 +20,14 @@ public class TSPExperimentLogger extends Logger {
 			throw new RuntimeException("Instance of experiment not valid: " + experiment.getClass().getSimpleName());
 		TSPExperiment bExperiment = (TSPExperiment)experiment;
 		return new String[] {
-				"PRIMARIA",
+				bExperiment.getCountry().getName(),
+				bExperiment.getTspAlgorithm().getName(),
 				""+bExperiment.getInitTime(),
 				""+bExperiment.getEndTime(),
 				""+bExperiment.getTimeTaken(),
+				""+bExperiment.getResults().length,
 				""+bExperiment.getPerformance(),
-				""+bExperiment.getTspAlgorithm().getName()
+				""+bExperiment.getCitiesCount()
 		};
 	}
 }

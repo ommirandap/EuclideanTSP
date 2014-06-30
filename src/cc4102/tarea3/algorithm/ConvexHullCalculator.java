@@ -3,16 +3,16 @@ package cc4102.tarea3.algorithm;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
+import cc4102.tarea3.adt.Circuit;
 import cc4102.tarea3.geom.Point;
 
 public class ConvexHullCalculator {
 
 	// builds a convex hull around the given points
 	// using the Graham scan algorithm
-	public List<Point> buildHull(Point[] points) {
+	public Circuit buildHull(Point[] points) {
 		if (points.length < 3)
 			return null;
 
@@ -66,8 +66,10 @@ public class ConvexHullCalculator {
 			}
 			hull.push(cur);
 		}
-
-		return new LinkedList<Point>(hull);
+		
+		Circuit circuit = new Circuit(hull);
+		circuit.calculateDistances();
+		return circuit;
 	}
 
 }
