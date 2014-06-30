@@ -11,12 +11,12 @@ public class DataReaderTest {
 
 	@Test
 	public void test() {
-		DataReader dataReader = new DataReader(Country.TEST);
-		dataReader.getData();
-		assertEquals(dataReader.data.length, 3);
-		assertEquals(dataReader.data[0], new Point(0,0));
-		assertEquals(dataReader.data[1], new Point(3,0));
-		assertEquals(dataReader.data[2], new Point(3,4));
+		DataReader dataReader = new DataReader();
+		Point[] data = dataReader.getData(Country.TEST);
+		assertEquals(data.length, 3);
+		assertEquals(data[0], new Point(0,0));
+		assertEquals(data[1], new Point(3,0));
+		assertEquals(data[2], new Point(3,4));
 	}
 
 }

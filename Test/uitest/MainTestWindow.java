@@ -1,3 +1,4 @@
+package uitest;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -19,8 +20,13 @@ public class MainTestWindow {
 	List<Point> points;
 	List<Point> path;
 	Point selected;
+<<<<<<< HEAD:Test/MainTestWindow.java
 	//TSPAlgorithm algorithm = new ConvexHullAlgorithm();
 	TSPAlgorithm algorithm = new NearestPointAlgorithm();
+=======
+	TSPAlgorithm algorithm = new ConvexHullAlgorithm();
+	//TSPAlgorithm algorithm = new ConvexHullDummyTest();
+>>>>>>> 1c7fd2c37392e089ceea008a82a5e44f3ac88e1a:Test/uitest/MainTestWindow.java
 	JFrame jframe;
 	
 	public MainTestWindow() {
@@ -83,6 +89,8 @@ public class MainTestWindow {
 					
 					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 				}
+				g.setColor(Color.ORANGE);
+				g.drawString("length:"+results.length, 15, 40);
 			}
 			jframeg.drawImage(bi, 0,0,null);
 		}
