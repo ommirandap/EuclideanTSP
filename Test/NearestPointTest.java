@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cc4102.tarea3.algorithm.NearestPointAlgorithm;
@@ -11,72 +12,54 @@ import cc4102.tarea3.geom.Point;
 
 public class NearestPointTest {
 
-	// public static void main(String[] args) {
-	// NearestPointAlgorithm npa = new NearestPointAlgorithm();
-	// Point[] points = new Point[] { new Point(0, 0), new Point(1, 1),
-	// new Point(0, 1), new Point(1, 0) };
-	// TSPAlgorithmResults results = npa.run(points);
-	// // assertEquals(4, results.length, 0);
-	// for (Point p : results.circuit) {
-	// System.out.print(p.toString());
-	// }
-	// }
-
+	NearestPointAlgorithm NPA;
+	TSPAlgorithmResults results;
+	Point []points;
+	
+	@Before 
+	public void initialize(){
+		NPA = new NearestPointAlgorithm();
+	}
+	
 	@Test
 	public void testUnitSquare() {
-		NearestPointAlgorithm npa = new NearestPointAlgorithm();
-		Point[] points = new Point[] { 
+		points = new Point[] { 
 				new Point(0, 0), new Point(1, 1),
 				new Point(0, 1), new Point(1, 0) 
 				};
-		TSPAlgorithmResults results = npa.run(points);
+		results = NPA.run(points);
 		assertEquals(4, results.length, 0);
-		for (Point p : results.circuit) {
-			System.out.print(p.toString());
-		}
-		System.out.println();
 	}
 	
 	@Test
 	public void testBigSquare() {
-		NearestPointAlgorithm npa = new NearestPointAlgorithm();
+		NPA = new NearestPointAlgorithm();
 		int n = 10;
 		Point[] points = new Point[2*n];
+		// TODO Agregar los lados del cuadrado
 		for(int i = 0; i < n; i++){
 			points[i] = new Point(0, i);
 			points[i + n] = new Point(n-1, i);
 		}
-		
-		TSPAlgorithmResults results = npa.run(points);
-		
-		System.out.println("BigSquare");
-		for (Point p : results.circuit)
-			System.out.print(p.toString());
-		System.out.println();
-		
+		results = NPA.run(points);
 		assertEquals(4*(n-1), results.length, 0);
 	}
 
 	@Test
 	public void testLine() {
-		NearestPointAlgorithm npa = new NearestPointAlgorithm();
-		Point[] points = new Point[] { 
+		NPA = new NearestPointAlgorithm();
+		points = new Point[] { 
 				new Point(0, 0), new Point(0, 1),
 				new Point(0, 2), new Point(0, 3), 
 				new Point(0, 4), new Point(0, 5) 
 				};
-		TSPAlgorithmResults results = npa.run(points);
+		results = NPA.run(points);
 		assertEquals(10, results.length, 0.001);
-		for (Point p : results.circuit) {
-			System.out.print(p.toString());
-		}
-		System.out.println();
-
 	}
 	
 	@Test
 	public void testRectangle() {
-		NearestPointAlgorithm npa = new NearestPointAlgorithm();
+		NPA = new NearestPointAlgorithm();
 		Point[] points = new Point[] { 
 				new Point(0, 0), new Point(0, 1),
 				new Point(0, 2), new Point(1, 2), 
@@ -84,13 +67,8 @@ public class NearestPointTest {
 				new Point(3, 1), new Point(3, 0),
 				new Point(2, 0), new Point(1, 0)
 				};
-		TSPAlgorithmResults results = npa.run(points);
+		TSPAlgorithmResults results = NPA.run(points);
 		assertEquals(10, results.length, 0.0);
-		for (Point p : results.circuit) {
-			System.out.print(p.toString());
-		}
-		System.out.println();
-
 	}
 	
 }

@@ -1,4 +1,4 @@
-package cc4102.tarea3.adt;
+package cc4102.tarea3.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -9,8 +9,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import cc4102.tarea3.adt.Kruskal;
 import cc4102.tarea3.algorithm.ConvexHullAlgorithm;
+import cc4102.tarea3.algorithm.Kruskal;
+import cc4102.tarea3.algorithm.NearestPointAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm.TSPAlgorithmResults;
 import cc4102.tarea3.geom.Arc;
@@ -28,8 +29,8 @@ public class MainTestWindow {
 	}
 	
 	public void start() {
-		//jframe = new MyJFrame(new ConvexHullAlgorithm());
-		jframe = new MyTreeJFrame();
+		jframe = new MyJFrame(new NearestPointAlgorithm());
+		//jframe = new MyTreeJFrame();
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(500, 500);
 		jframe.setVisible(true);

@@ -20,7 +20,7 @@ public class Main {
 		TSPExperimentLogger tspLogger = new TSPExperimentLogger();
 		tspLogger.startLogging();
 		TSPAlgorithm[] algorithms = new TSPAlgorithm[] {
-				new ConvexHullAlgorithm()/*, new MSTAlgorithm(), new NearestPointAlgorithm()*/
+				/*new ConvexHullAlgorithm(), new MSTAlgorithm(), */new NearestPointAlgorithm()
 		}; 
 		
 		for(Country country : Country.values()) {
