@@ -9,10 +9,11 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import cc4102.tarea3.adt.Kruskal;
 import cc4102.tarea3.algorithm.ConvexHullAlgorithm;
-import cc4102.tarea3.algorithm.NearestPointAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm.TSPAlgorithmResults;
+import cc4102.tarea3.geom.Arc;
 import cc4102.tarea3.geom.Point;
 
 
@@ -20,13 +21,6 @@ public class MainTestWindow {
 	List<Point> points;
 	List<Point> path;
 	Point selected;
-<<<<<<< HEAD:Test/MainTestWindow.java
-	//TSPAlgorithm algorithm = new ConvexHullAlgorithm();
-	TSPAlgorithm algorithm = new NearestPointAlgorithm();
-=======
-	TSPAlgorithm algorithm = new ConvexHullAlgorithm();
-	//TSPAlgorithm algorithm = new ConvexHullDummyTest();
->>>>>>> 1c7fd2c37392e089ceea008a82a5e44f3ac88e1a:Test/uitest/MainTestWindow.java
 	JFrame jframe;
 	
 	public MainTestWindow() {
@@ -34,7 +28,8 @@ public class MainTestWindow {
 	}
 	
 	public void start() {
-		jframe = new MyJFrame();
+		//jframe = new MyJFrame(new ConvexHullAlgorithm());
+		jframe = new MyTreeJFrame();
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(500, 500);
 		jframe.setVisible(true);
@@ -46,8 +41,10 @@ public class MainTestWindow {
 	
 	class MyJFrame extends JFrame {
 		BufferedImage bi;
+		final TSPAlgorithm algorithm;
 		
-		public MyJFrame() {
+		public MyJFrame(TSPAlgorithm algorithm) {
+			this.algorithm = algorithm;
 			bi = new BufferedImage(500,500, BufferedImage.TYPE_INT_RGB);
 			//setBackground(Color.white);
 			MyMouseAdapter mAdapter = new MyMouseAdapter();
@@ -66,8 +63,13 @@ public class MainTestWindow {
 			Graphics g = bi.getGraphics();
 			g.setColor(Color.white);
 			g.fillRect(0, 0, 500, 500);
-			TSPAlgorithmResults results;
 				 
+			paintPoints(g);
+			drawLines(g);
+			jframeg.drawImage(bi, 0,0,null);
+		}
+		
+		protected void paintPoints(Graphics g) {
 			for(Point p : points) {
 				if(p == selected)
 					g.setColor(Color.red);
@@ -77,9 +79,12 @@ public class MainTestWindow {
 				int radius = 10;
 				g.fillArc((int)p.getX()-radius/2,(int)p.getY()-radius/2, radius, radius, 0, 360);
 			}
+		}
+		
+		protected void drawLines(Graphics g) {
 			g.setColor(Color.green);
 			if(points.size() >= 3) {
-				results = algorithm.run(points.toArray(new Point[]{}));
+				TSPAlgorithmResults results = algorithm.run(points.toArray(new Point[]{}));
 				for(int i=0 ; i < results.circuit.size() ; i++) {
 					if(i==0)
 						g.setColor(Color.red);
@@ -92,7 +97,6 @@ public class MainTestWindow {
 				g.setColor(Color.ORANGE);
 				g.drawString("length:"+results.length, 15, 40);
 			}
-			jframeg.drawImage(bi, 0,0,null);
 		}
 	}
 	
@@ -136,6 +140,28 @@ public class MainTestWindow {
 			System.out.println("released");
 			selected = null;
 			jframe.repaint();
+		}
+	}
+	
+	class MyTreeJFrame extends MyJFrame{
+		Kruskal kruskal;
+		public MyTreeJFrame() {
+			super(null);
+			kruskal = new Kruskal();
+		}
+		
+		@Override
+		protected void drawLines(Graphics g) {
+			g.setColor(Color.green);
+			if(points.size() >= 3) {
+				List<Arc> results = kruskal.computeMST(points);
+				for(Arc arc : results) {
+					Point p = arc.getP1();
+					Point q = arc.getP2();
+					
+					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
+				}
+			}
 		}
 	}
 }

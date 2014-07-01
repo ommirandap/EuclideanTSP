@@ -97,10 +97,10 @@ public class ConvexHullAlgorithm implements TSPAlgorithm {
 				p3 = currentCircuit.get(0);
 			else
 				p3 = iterator.next();
+			//evaluateDistances(pOutsideHull, currentCircuit);
 			// Check if the node was candidate to a segment that was split in the last step
 			if(pOutsideHull.p1 == p1 && pOutsideHull.p2 == p3) {
 				// In this case, we have to re-evaluate distances to all segments of the circuit.
-				//evaluateDistances(pOutsideHull, currentCircuit);
 				pOutsideHull.p1 = null;
 				pOutsideHull.testPair(p1, p2, iteratorDistances.next());
 				pOutsideHull.testPair(p2, p3, iteratorDistances.next());

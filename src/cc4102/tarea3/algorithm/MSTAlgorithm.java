@@ -6,7 +6,7 @@ public class MSTAlgorithm implements TSPAlgorithm {
 	
 	@Override
 	public TSPAlgorithmResults run(Point[] pointList) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
