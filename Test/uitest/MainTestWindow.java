@@ -12,7 +12,9 @@ import javax.swing.JFrame;
 import cc4102.tarea3.algorithm.ConvexHullAlgorithm;
 import cc4102.tarea3.algorithm.Kruskal;
 import cc4102.tarea3.algorithm.NearestPointAlgorithm;
+import cc4102.tarea3.algorithm.Prim;
 import cc4102.tarea3.algorithm.TSPAlgorithm;
+import cc4102.tarea3.algorithm.UndirectedGraph;
 import cc4102.tarea3.algorithm.TSPAlgorithm.TSPAlgorithmResults;
 import cc4102.tarea3.geom.Arc;
 import cc4102.tarea3.geom.Point;
@@ -30,7 +32,8 @@ public class MainTestWindow {
 	
 	public void start() {
 		//jframe = new MyJFrame(new NearestPointAlgorithm());
-		jframe = new MyTreeJFrame();
+		//jframe = new MyTreeJFrame();
+		jframe = new MyPrimTreeJFrame();
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(500, 500);
 		jframe.setVisible(true);
@@ -161,6 +164,38 @@ public class MainTestWindow {
 					Point q = arc.getP2();
 					
 					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
+				}
+			}
+		}
+	}
+	
+	class MyPrimTreeJFrame extends MyJFrame{
+		Kruskal kruskal;
+		public MyPrimTreeJFrame() {
+			super(null);
+			kruskal = new Kruskal();
+		}
+		
+		@Override
+		protected void drawLines(Graphics g) {
+			if(points.size() < 3) return;
+			g.setColor(Color.green);
+			UndirectedGraph<Point> G = new UndirectedGraph<Point>();
+			
+			for(int i =0; i < points.size(); i++){
+				for(int j = i+1; j < points.size(); j++){
+					Point p1 = points.get(i);
+					Point p2 = points.get(j);
+					G.addNode(p1);
+					G.addNode(p2);
+					G.addEdge(p1, p2, p1.distance(p2));
+				}
+			}
+			UndirectedGraph<Point> res = Prim.mst(G);
+			
+			for(Point point1 : res){
+				for(Point point2 : res.edgesFrom(point1).keySet()) {
+					g.drawLine((int)point1.getX(), (int)point1.getY(), (int)point2.getX(), (int)point2.getY());
 				}
 			}
 		}

@@ -1,11 +1,6 @@
 package cc4102.tarea3.algorithm;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import cc4102.tarea3.geom.Point;
-import cc4102.tarea3.algorithm.*;
 
 public class MSTGraphTest {
 
@@ -28,16 +23,11 @@ public class MSTGraphTest {
 		}
 		
 		UndirectedGraph<Point> res = Prim.mst(G);
-		Iterator<Point> it = res.iterator();
 		
-		while(it.hasNext()){
-			Point aux = it.next();
+		for(Point aux : res){
 			System.out.println(aux.toString());
-			Map<Point, Double> hm = res.edgesFrom(aux);
-			Set<Point> ble = hm.keySet();
-			Iterator it2 = ble.iterator();
-			while(it2.hasNext()){
-				System.out.println("\t"+it2.next());
+			for(Point point : res.edgesFrom(aux).keySet()) {
+				System.out.println("\t"+point);
 			}
 		}
 		
