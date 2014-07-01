@@ -29,8 +29,8 @@ public class MainTestWindow {
 	}
 	
 	public void start() {
-		jframe = new MyJFrame(new NearestPointAlgorithm());
-		//jframe = new MyTreeJFrame();
+		//jframe = new MyJFrame(new NearestPointAlgorithm());
+		jframe = new MyTreeJFrame();
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(500, 500);
 		jframe.setVisible(true);
