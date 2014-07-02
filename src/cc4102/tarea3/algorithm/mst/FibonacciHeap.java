@@ -50,11 +50,13 @@
  * we can implement delete by decreasing a key to -\infty, then calling
  * dequeueMin to extract it.
  */
-package cc4102.tarea3.algorithm;
-import java.util.*; // For ArrayList
+package cc4102.tarea3.algorithm.mst;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException; // For ArrayList
 
 /**
- * A class representing a Fibonacci heap.
+ * A class representing a Fibonacci heap. Used in {@link Prim}.
  *
  * @param T The type of elements to store in the heap.
  * @author Keith Schwarz (htiek@cs.stanford.edu)

@@ -2,7 +2,6 @@ package cc4102.tarea3.algorithm;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.Stack;
 
 import cc4102.tarea3.adt.Circuit;

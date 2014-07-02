@@ -1,13 +1,3 @@
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-
-import org.junit.Test;
-
-import cc4102.tarea3.geom.Point;
 
 public class PointCircuitTests {
 

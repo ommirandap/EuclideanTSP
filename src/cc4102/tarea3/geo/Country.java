@@ -13,7 +13,7 @@ public enum Country{
 	ITALY("ITALY", 557315), 
 	JAPAN("JAPAN", 491924), 
 	CANADA("CANADA", 1290319), 
-	TEST("TEST", 16)
+	TEST("TEST", 16) //Test country used for testing purposes.
 	;
 
 	private final String name;

@@ -47,9 +47,11 @@
  *
  *         http://keithschwarz.com/interesting/code/?dir=fibonacci-heap
  */
-package cc4102.tarea3.algorithm;
-import java.util.*; // For HashMap
+package cc4102.tarea3.algorithm.mst;
+import java.util.HashMap;
+import java.util.Map; // For HashMap
 
+//Though this algorithm isn't finally used due to its huge memory usage, it is left here anyway.
 public final class Prim {
     /**
      * Given a connected undirected graph with real-valued edge costs,

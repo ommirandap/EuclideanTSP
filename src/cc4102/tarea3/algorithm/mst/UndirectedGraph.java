@@ -9,9 +9,19 @@
  * a standard adjacency list and then duplicating the logic to ensure each
  * edge appears twice.
  */
-package cc4102.tarea3.algorithm;
-import java.util.*; // For HashMap
+package cc4102.tarea3.algorithm.mst;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map; // For HashMap
+import java.util.NoSuchElementException;
 
+/**
+ * Class used in {@link Prim} Algorithm for calculating a MST.
+ * @author Omar
+ *
+ * @param <T> Type of value used in vertices of the graph
+ */
 public final class UndirectedGraph<T> implements Iterable<T> {
     /* A map from nodes in the graph to sets of outgoing edges.  Each
      * set of edges is represented by a map from edges to doubles.

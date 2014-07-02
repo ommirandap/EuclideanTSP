@@ -4,6 +4,10 @@ import java.util.List;
 
 import cc4102.tarea3.geom.Point;
 
+/**
+ * Interface of an algorithm that solves a TSP problem instance.
+ * @author Gonzalo
+ */
 public interface TSPAlgorithm {
 	
 	public TSPAlgorithmResults run(Point[] pointList);

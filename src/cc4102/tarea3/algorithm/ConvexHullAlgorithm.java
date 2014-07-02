@@ -3,7 +3,6 @@ package cc4102.tarea3.algorithm;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Set;
 
 import cc4102.tarea3.adt.Circuit;

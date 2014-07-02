@@ -3,8 +3,8 @@ package cc4102.tarea3.io;
 
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 import cc4102.tarea3.geo.Country;
 import cc4102.tarea3.geom.Point;

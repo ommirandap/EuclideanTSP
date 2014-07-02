@@ -1,5 +1,7 @@
-package cc4102.tarea3.algorithm;
 
+
+import cc4102.tarea3.algorithm.mst.Prim;
+import cc4102.tarea3.algorithm.mst.UndirectedGraph;
 import cc4102.tarea3.geom.Point;
 
 public class MSTGraphTest {

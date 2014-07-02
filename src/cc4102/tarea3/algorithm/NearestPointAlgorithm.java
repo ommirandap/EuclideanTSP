@@ -2,6 +2,7 @@ package cc4102.tarea3.algorithm;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import cc4102.tarea3.geom.Point;
 
 public class NearestPointAlgorithm implements TSPAlgorithm {

@@ -1,22 +1,21 @@
 package uitest;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
-import cc4102.tarea3.algorithm.ConvexHullAlgorithm;
-import cc4102.tarea3.algorithm.Kruskal;
-import cc4102.tarea3.algorithm.NearestPointAlgorithm;
-import cc4102.tarea3.algorithm.Prim;
+import cc4102.tarea3.algorithm.MSTAlgorithm;
 import cc4102.tarea3.algorithm.TSPAlgorithm;
-import cc4102.tarea3.algorithm.UndirectedGraph;
 import cc4102.tarea3.algorithm.TSPAlgorithm.TSPAlgorithmResults;
-import cc4102.tarea3.geom.Arc;
+import cc4102.tarea3.algorithm.mst.Kruskal;
 import cc4102.tarea3.geom.Point;
 
 
@@ -32,8 +31,9 @@ public class MainTestWindow {
 	
 	public void start() {
 		//jframe = new MyJFrame(new NearestPointAlgorithm());
-		//jframe = new MyTreeJFrame();
-		jframe = new MyPrimTreeJFrame();
+		//jframe = new MyJFrame(new MSTAlgorithm());
+		//jframe = new MyJFrame(new ConvexHullAlgorithm());
+		jframe = new MyTreeJFrame();
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(500, 500);
 		jframe.setVisible(true);
@@ -149,54 +149,55 @@ public class MainTestWindow {
 	
 	class MyTreeJFrame extends MyJFrame{
 		Kruskal kruskal;
+		Map<Point, List<Point>> results;
+		boolean displayMST = true;
 		public MyTreeJFrame() {
-			super(null);
+			super(new MSTAlgorithm());
 			kruskal = new Kruskal();
-		}
-		
-		@Override
-		protected void drawLines(Graphics g) {
-			g.setColor(Color.green);
-			if(points.size() >= 3) {
-				List<Arc> results = kruskal.computeMST(points);
-				for(Arc arc : results) {
-					Point p = arc.getP1();
-					Point q = arc.getP2();
+			addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if(e.getKeyChar() == 'a') {
+						displayMST = !displayMST;
+						jframe.repaint();
+					}
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
 					
-					g.drawLine((int)p.getX(), (int)p.getY(), (int)q.getX(), (int)q.getY());
 				}
-			}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
-	}
-	
-	class MyPrimTreeJFrame extends MyJFrame{
-		Kruskal kruskal;
-		public MyPrimTreeJFrame() {
-			super(null);
-			kruskal = new Kruskal();
+		
+		@Override
+		protected void paintPoints(Graphics g) {
+			super.paintPoints(g);
+			if(points.size() >= 3 && displayMST) {
+				g.setColor(Color.white);
+				results = kruskal.computeMST(points);
+				int radius = 6;
+				Point p = results.keySet().iterator().next();
+				g.fillArc((int)p.getX()-radius/2,(int)p.getY()-radius/2, radius, radius, 0, 360);
+			}
 		}
 		
 		@Override
 		protected void drawLines(Graphics g) {
-			if(points.size() < 3) return;
-			g.setColor(Color.green);
-			UndirectedGraph<Point> G = new UndirectedGraph<Point>();
-			
-			for(int i =0; i < points.size(); i++){
-				for(int j = i+1; j < points.size(); j++){
-					Point p1 = points.get(i);
-					Point p2 = points.get(j);
-					G.addNode(p1);
-					G.addNode(p2);
-					G.addEdge(p1, p2, p1.distance(p2));
-				}
-			}
-			UndirectedGraph<Point> res = Prim.mst(G);
-			
-			for(Point point1 : res){
-				for(Point point2 : res.edgesFrom(point1).keySet()) {
-					g.drawLine((int)point1.getX(), (int)point1.getY(), (int)point2.getX(), (int)point2.getY());
-				}
+			super.drawLines(g);
+			g.setColor(Color.cyan);
+			if(points.size() >= 3 && displayMST) {
+				for(Point p1 : results.keySet())
+					for(Point p2 : results.get(p1))
+						g.drawLine((int)p1.getX(), (int)p1.getY(), (int)p2.getX(), (int)p2.getY());
 			}
 		}
 	}
